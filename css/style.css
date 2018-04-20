@@ -68,9 +68,9 @@ body {
         width: 750px
     }
 }
-@media (min-width: 1000px) {
+@media (min-width: 1200px) {
     .container {
-        width: 970px
+        width: 1030px
     }
 }
 
@@ -94,7 +94,8 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 8px 0;
+    padding: 6px 0;
+    position: relative;
 }
 
 .header-left, .header-right {
@@ -117,8 +118,8 @@ header {
 .logo-img {
     background-image: url(https://www.facebook.com/rsrc.php/v3/yx/r/pzdnQfNKajS.png);
     background-position: 0 -171px;
-    height: 25px;
-    width: 25px
+    height: 24px;
+    width: 24px
 }
 
 .search {
@@ -200,18 +201,23 @@ header {
     color: #909090;
 }
 
+.edit-link:hover {
+    text-decoration: underline;
+}
+
 .search-input:focus ~ .recent-searches {
     display: block;
 }
 
 .header-nav-list {
     display: flex;
+    align-items: center;
 }
 
 .header-nav-item {
-    border-radius: 3px;
-    position: relative;
     display: flex;
+    position: relative;
+    border-radius: 3px;
 }
 
 .header-nav-item:after {
@@ -222,7 +228,7 @@ header {
     width: 1px;
     position: absolute;
     right: 0;
-    top: 3px;
+    top: 5px;
 }
 
 .header-nav-item:hover {
@@ -236,8 +242,162 @@ header {
 .header-nav-link {
     display: block;
     height: 100%;
-    padding: 5px 12px;
+    padding: 8px 12px;
 }
+
+.profile-link {
+    display: flex;
+    align-items: center;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.user-avatar {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    margin-right: 5px;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.nav-buttons {
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.nav-btn {
+    margin-right: 10px;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.nav-btn:last-child {
+    margin-right: 0;
+}
+
+.nav-btn:before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    opacity: .6;
+}
+
+.nav-btn:focus {
+    outline: none;
+}
+
+.nav-btn:hover:before {
+    opacity: .9;
+}
+
+.nav-btn:focus:before {
+    opacity: .9;
+}
+
+.nav-btn:focus:after {
+    content: "";
+    display: block;
+    position: absolute;
+    border: 10px solid transparent;
+    border-bottom-color: white;
+    margin-top: -11px;
+    margin-left: 2px;
+}
+
+.nav-btn.friend-requests:before {
+    background-image: url(https://www.facebook.com/rsrc.php/v3/yw/r/HrH-7nX4RPy.png);
+    background-position: 0 -275px;
+}
+
+.nav-btn:focus.friend-requests:before {
+    background-position: 0 -300px;
+}
+
+.nav-btn.messages:before {
+    background-image: url(https://www.facebook.com/rsrc.php/v3/yx/r/pzdnQfNKajS.png);
+    background-position: 0 -246px;
+}
+
+.nav-btn:focus.messages:before {
+    background-position: 0 -271px;
+}
+
+.nav-btn.notifications:before {
+    background-image: url(https://www.facebook.com/rsrc.php/v3/yw/r/HrH-7nX4RPy.png);
+    background-position: 0 -424px;
+}
+
+.nav-btn:focus.notifications:before {
+    background-position: 0 -450px;
+}
+
+.nav-btn.support:before {
+    background-image: url(https://www.facebook.com/rsrc.php/v3/yx/r/pzdnQfNKajS.png);
+    background-position: 0 -466px;
+    height: 20px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+.nav-btn:focus.support:before {
+    background-position: 0 -487px;
+}
+
+.nav-btn.triangle:before {
+    background-image: url(https://www.facebook.com/rsrc.php/v3/yx/r/pzdnQfNKajS.png);
+    background-position: 0 -711px;
+    height: 18px;
+    margin-top: 5px;
+    margin-bottom: 3px;
+
+}
+
+.nav-btn:focus.triangle:before {
+    background-position: 0 -728px;
+}
+
+.nav-btn:focus .popup {
+    display: block;
+}
+
+.nav-buttons .popup {
+    display: none;
+    height: 500px;
+    width: 430px;
+    background: white;
+    box-shadow: 0 4px 6px 2px rgba(0, 0, 0, .1);    
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: 1px;
+    border-radius: 3px;
+}
+
+.nav-buttons .popup-top {
+    color: #2a2a2a;
+    padding: 8px 15px;
+    border-bottom: 1px solid #ccc;
+}
+
+.nav-btn.support {
+    margin-left: 15px;
+}
+
+.vertline {
+    width: 1px;
+    background: rgba(0, 0, 0, .1);
+    height: 18px;
+}
+
+/*
+    RIGHT SIDEBAR
+*/
 
 .right-sidebar {
     position: absolute;
@@ -246,5 +406,134 @@ header {
     height: 100vh;
     width: 200px;
     border-left: 1px solid #ccc;
+    padding-top: 40px;
 }
 
+.games {
+    height: 170px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.friend {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: #3a3a3a;
+    font-weight: 100;
+    padding: 2px 10px;
+    cursor: pointer;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.friend:after {
+    content: "";
+    display: block;
+    height: 100%;
+    width: 30px;
+    position: absolute;
+    left: 0;
+    margin-left: -25px;
+}
+
+.friend:hover {
+    background: #dddfe2;
+}
+
+.friend:hover .friend-info {
+    display: flex;
+}
+
+.friend .user-avatar {
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+}
+
+.friend-status {
+    float: right;
+    margin-left: auto;
+    margin-right: 5px;
+    color: #999;
+    font-weight: bold;
+}
+
+.friend-status.online {
+    height: 6px;
+    width: 6px;
+    border-radius: 50%;
+    background: rgb(66, 183, 42);
+}
+
+.friend-info {
+    display: none;
+    position: absolute;
+    width: 370px;
+    box-shadow: 0px 0px 5px 0px #999;
+    right: 100%;
+    top: 0;
+    margin-right: 20px;
+    border-radius: 2px;
+    background: white;
+    padding: 10px;
+    cursor: initial;
+}
+
+.friend-info:after {
+    content: '';
+    display: block;
+    width: 12px;
+    height: 12px;
+    background: white;
+    position: absolute;
+    right: 0;
+    top: 15px;
+    margin-right: -5px;
+    transform: rotate(-45deg);
+    box-shadow: 2px 2px 5px -1px #999;
+}
+
+.friend-photo {
+    width: 100px;
+    height: 100px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    margin-right: 10px;
+}
+
+.friend-name-link {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    color: #365899 !important;
+}
+
+.friend-name-link:hover {
+    text-decoration: underline;
+}
+
+.friend-followers {
+    color: #aaa;
+}
+
+.living-block {
+    margin-top: 30px;
+    font-size: 12px;
+    color: #555;
+    cursor: pointer;
+}
+
+.living-block .fa {
+    font-size: 16px;
+    margin-right: 5px;
+}
+
+.living {
+    color: #365899 !important;
+}
+
+.living:hover {
+    text-decoration: underline;
+}

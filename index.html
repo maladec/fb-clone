@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Facebook clone</title>
+    <link rel="shortcut icon" href="https://static.xx.fbcdn.net/rsrc.php/yo/r/iRmz9lCMBD2.ico" />
+    <title>Facebook Clone</title>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -26,7 +27,7 @@
                     <div class="recent-searches">
                         <div class="recent-searches-top">
                             <div class="title">Recent Searches</div>
-                            <a href="google.com" class="edit-link">Edit</a>
+                            <a href="" class="edit-link">Edit</a>
                         </div>
                     </div>
                 </div>
@@ -35,21 +36,89 @@
                 <div class="header-nav">
                     <ul class="header-nav-list">
                         <li class="header-nav-item">
-                            <a href="/" class="profile-link header-nav-link">Profile</a>
+                            <a href="/" class="profile-link header-nav-link profile-link">
+                                <div class="user-avatar"></div>
+                                <span class="user-name"></span>
+                            </a>
                         </li>
                         <li class="header-nav-item">
-                            <a href="/" class="profile-link header-nav-link">Home</a>
+                            <a href="/" class="header-nav-link">Home</a>
                         </li>
                         <li class="header-nav-item">
-                            <a href="/" class="profile-link header-nav-link">Find Friends</a>
+                            <a href="/" class="header-nav-link">Find Friends</a>
                         </li>
                     </ul>
                 </div>
+                <div class="nav-buttons">
+                    <div class="friend-requests nav-btn" tabindex="-1">
+                        <div class="popup">
+                            <div class="popup-top">
+                                Friend Requests
+                            </div>
+                        </div>
+                    </div>
+                    <div class="messages nav-btn" tabindex="-1">
+                        <div class="popup">
+                            <div class="popup-top">
+                                Recent(<span class="recent-messages-count">3</span>)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="notifications nav-btn" tabindex="-1">
+                        <div class="popup">
+                            <div class="popup-top">
+                                Notifications
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vertline"></div>
+                    <div class="support nav-btn" tabindex="-1">
+                        <div class="popup">
+                            <div class="popup-top">
+                                Support
+                            </div>
+                        </div>
+                    </div>
+                    <div class="triangle nav-btn" tabindex="-1">
+                        <div class="popup">
+                            <div class="popup-top">
+                                Triangle
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </header>
     <aside class="right-sidebar">
-        
+        <div class="games">
+
+        </div>
+        <div class="conversations">
+            <!-- <div class="friend">
+                <div class="user-avatar">
+
+                </div>
+                <div class="friend-name">
+                    Saba Natroshvili
+                </div>
+                <div class="friend-status">
+                    36m
+                </div>
+                <div class="friend-info">
+                    <div class="friend-photo"></div>
+                    <div>
+                        <a href="" class="friend-name-link">Saba Natroshvili</a>
+                        <span class="friend-followers">35 followers</span>
+                        <div class="living-block">
+                            <i class="fa fa-home" aria-hidden="true"></i> Lives in <span class="living">Georgia, Tbilisi</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div> -->
+        </div>
     </aside>
     <script src="js/dummy-data.js"></script>
     <script src="js/main.js"></script>
