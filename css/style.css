@@ -434,7 +434,7 @@ header {
     position: absolute;
     top: var(--header-height-appr);
     padding-right: 15px;
-    right: -1px;
+    left: 1px;
     background: var(--bg-color);
     z-index: 1;
 }
