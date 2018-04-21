@@ -7,6 +7,8 @@
     --header-color: #4267B2;
     --search-btn-active: #4080FF;
     --blue-border: #3B5998;
+    --header-height-appr: 42px;
+    --right-siderbar-width: 210px;
 }
 
 html {
@@ -86,6 +88,7 @@ header {
     font-size: 12px;
     padding-right: 200px;
     position: fixed;
+    top: 0;
     width: 100%;
     z-index: 100;
 }
@@ -400,19 +403,40 @@ header {
 */
 
 .right-sidebar {
-    position: absolute;
+    height: 100vh;
+    position: fixed;
     right: 0;
     top: 0;
-    height: 100vh;
-    width: 200px;
-    border-left: 1px solid #ccc;
-    padding-top: 40px;
+    padding-top: var(--header-height-appr);
+}
+
+.conversations {
+    height: calc(100vh - var(--header-height-appr));
+    overflow-y: scroll;
+    position: relative;
+    margin-right: -15px;
+    padding-left: 400px;
+    
+}
+
+.conversations .inner {
+    border-left: 1px solid #ccc;    
+    width: var(--right-siderbar-width); 
+    padding-top: 180px;
+    background: var(--bg-color);
+    min-height: 100%;
 }
 
 .games {
     height: 170px;
+    width: var(--right-siderbar-width);
     border-bottom: 1px solid #ccc;
-    margin-bottom: 10px;
+    position: absolute;
+    top: var(--header-height-appr);
+    padding-right: 15px;
+    right: -1px;
+    background: var(--bg-color);
+    z-index: 1;
 }
 
 .friend {

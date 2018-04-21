@@ -1,5 +1,5 @@
 document.querySelector('.search-input').onblur = function(){
-    if(document.querySelectorAll('.recent-searches:hover').length){
+    if(document.querySelector('.recent-searches:hover')){
         this.focus();
     }
 }
@@ -18,17 +18,19 @@ document.querySelectorAll('.user-avatar').forEach((elem) => {
 
 document.querySelectorAll('.nav-btn').forEach((btn) => {
     btn.onmousedown = function(){
-        console.log('dooown');
-        console.log(document.activeElement);
-        console.log(this);
-        console.log(document.activeElement === this);
-        console.log(this.querySelectorAll('.popup:hover').length);
-        if(document.activeElement === this && !this.querySelectorAll('.popup:hover').length){
+        if(document.activeElement === this && !this.querySelector('.popup:hover')){
             this.blur();
             return false;
         }
     }
 });
+
+document.querySelector('.conversations').onmousemove = function(){
+    if(document.querySelector('.friend:hover'))
+        this.style.paddingLeft = '400px';
+    else
+        this.style.paddingLeft = '0';
+}
 
 
 let createFriendInfo = (friend) => {
@@ -106,10 +108,9 @@ let createFriend = (friend) => {
 
 let addConv = () => { data.friends.forEach((friend) => {
     let fr = createFriend(friend);
-    document.querySelector('.conversations').appendChild(fr);
+    document.querySelector('.conversations .inner').appendChild(fr);
 })};
 
-addConv();
 addConv();
 addConv();
 addConv();
