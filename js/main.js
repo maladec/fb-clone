@@ -152,7 +152,7 @@ let createInstantGame = (game) => {
     gmLogo.classList.add('game-logo');
     gmLogo.style.backgroundImage = `url(${game.game_photo})`;
     gmDiv.appendChild(gmLogo);
-    return gmDiv;    
+    return gmDiv;
 }
 
 
@@ -173,7 +173,7 @@ let createStory = (story) => {
 
     let info = document.createElement('div');
     info.classList.add('story-info');
-    
+
     let author = document.createElement('div');
     author.classList.add('story-author');
     author.innerHTML = story.author.name;
@@ -187,7 +187,7 @@ let createStory = (story) => {
 
     st.appendChild(icon);
     st.appendChild(info);
-    
+
     return st;
 }
 
@@ -196,6 +196,61 @@ let addStories = () => {
         let st = createStory(story);
         document.querySelector('.stories').appendChild(st);
     });
+}
+
+function controlScroll(elem, down) {
+    let rect = elem.getBoundingClientRect();
+    let elemTop = rect.top;
+    let elemBottom = rect.bottom;
+
+    let isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight);
+    if (isVisible) return;
+    if (down && elemBottom <= window.innerHeight) {
+        elem.style.position = 'fixed';
+        elem.style.bottom = '0';
+        elem.style.top = 'auto';
+    } else if (!down && elemTop >= 0) {
+        elem.style.position = 'fixed';
+        elem.style.top = '0';
+        elem.style.bottom = '';
+    } else {
+        elem.style.position = 'absolute';
+        elem.style.top = scrollTop + elemTop + 'px';
+        elem.style.bottom = '';
+    }
+}
+
+let scrollTop = 0;
+
+document.addEventListener('scroll', function (e) {
+    let leftSb = document.querySelector('.left-sidebar');
+    let mainRight = document.querySelector('.main-right');
+
+    let st = window.pageYOffset || document.documentElement.scrollTop;
+    let down = st > scrollTop;
+    scrollTop = st;
+
+    controlScroll(leftSb, down);
+    controlScroll(mainRight, down);
+});
+
+document.querySelector('.post-input').onfocus = function () {
+    document.querySelector('.black-bg').classList.remove('initial');
+    document.querySelector('.black-bg').classList.add('active');
+    document.querySelector('.make-post-block').style.zIndex = '300';
+}
+
+document.querySelector('.post-input').onblur = function () {
+    if (document.querySelector('.make-post-block:hover')) {
+        this.focus();
+        return;
+    }
+    document.querySelector('.black-bg').classList.remove('active');
+    setTimeout(() => {
+        document.querySelector('.black-bg').classList.add('initial');
+        document.querySelector('.make-post-block').style.zIndex = '';
+    }, 300);
+
 }
 
 addConv();
