@@ -11,7 +11,7 @@ let data = {
             avatar_url: 'https://goo.gl/SwEuQB',
             followers: 36,
             country: 'Georgia',
-            city: 'Tbilisi',
+            city: 'Temqa',
             last_online: 0
         },
         {
@@ -19,8 +19,8 @@ let data = {
             lastname: 'Natroshvili',
             avatar_url: 'https://goo.gl/XFZ89d',
             followers: null,
-            country: 'Georgia',
-            city: 'Tbilisi',
+            country: 'Germany',
+            city: 'Munich',
             last_online: 36
         },
         {
@@ -29,7 +29,7 @@ let data = {
             avatar_url: 'https://goo.gl/tP1M7P',
             followers: 27,
             country: 'Georgia',
-            city: 'Tbilisi',
+            city: 'Sairme',
             last_online: 0
         }
     ],

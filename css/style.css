@@ -115,6 +115,24 @@ header {
 
 .logo {
     margin-right: 5px;
+    position: relative;
+}
+
+.logo:after {
+    content: "";
+    display: block;
+    height: calc(100% + 4px);
+    width: calc(100% + 4px);
+    position: absolute;
+    left: -2px;
+    top: -2px;
+    border-radius: 3px;
+    background: none;
+    z-index: -1;
+}
+
+.logo:hover:after {
+    background: #3B5CA0;
 }
 
 .logo-link {
@@ -141,6 +159,11 @@ header {
     font-size: 14px;
     padding-right: 50px;
     border: 1px solid var(--blue-border);
+    outline: none;
+}
+
+.search-input:focus::placeholder {
+    color: #BEC2C9;
 }
 
 .search-input::placeholder {
@@ -165,10 +188,6 @@ header {
     border-bottom: 1px solid var(--blue-border);
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
-}
-
-.search-input:focus {
-    outline: none;
 }
 
 .search-input:focus + .search-btn{
@@ -284,6 +303,7 @@ header {
     width: 25px;
     height: 25px;
     cursor: pointer;
+    outline: none;
 }
 
 .nav-btn:last-child {
@@ -296,10 +316,6 @@ header {
     width: 100%;
     height: 100%;
     opacity: .6;
-}
-
-.nav-btn:focus {
-    outline: none;
 }
 
 .nav-btn:hover:before {
@@ -599,10 +615,8 @@ header {
     padding-left: 30px;
     font-size: 14px;
     border-top-right-radius: 5px;
-}
-
-.conv-search-inp:focus {
     outline: none;
+    
 }
 
 .conv-search-inp::placeholder {
@@ -619,7 +633,7 @@ header {
 
 main {
     padding-right: var(--right-siderbar-width);
-    margin-top: var(--header-height-appr);
+    padding-top: calc(var(--header-height-appr) + 12px);
 }
 
 .left-sidebar {
@@ -671,6 +685,10 @@ main {
     background: #F6F7F9;
     border-color: #dddfe2;
     font-weight: bold;
+}
+
+.left-sb-link.active .dots {
+    display: block;
 }
 
 .left-sb-link:hover {
@@ -764,6 +782,11 @@ main {
     display: none;
     background-position: 0 -397px;
     margin-left: auto;
+    background-size: auto;
+    cursor: pointer;
+    background-image: url(https://facebook.com/rsrc.php/v3/yF/r/CzRFvdHdJ0W.png);
+    height: 18px;
+    width: 18px;
 }
 
 .create-link {
@@ -794,12 +817,8 @@ main {
 }
 
 .stories-block .dots {
-    background-image: url(https://facebook.com/rsrc.php/v3/yF/r/CzRFvdHdJ0W.png);
     display: block;
-    background-size: auto;
     border-radius: 0;
-    height: 18px;
-    width: 18px;
 }
 
 .feed-section {
@@ -807,7 +826,7 @@ main {
     border-radius: 5px;
     margin-bottom: 12px;
     background: white;    
-    padding: 12px;
+    padding: 10px 12px;
 }
 
 .stories-block .title, .games-block .title {
@@ -970,7 +989,6 @@ footer {
     margin-left: 10px;
     width: var(--main-feed-width);
     font-size: 14px;
-    margin-top: 55px;
 }
 
 .make-post-block {
@@ -1073,15 +1091,12 @@ footer {
     border: none;
     padding-left: 50px;
     font-size: 24px;
+    outline: none;
 }
 
 .post-input::placeholder {
     color: #A2A2A2;
     font-size: 14px;
-}
-
-.post-input:focus {
-    outline: none;
 }
 
 .black-bg {
@@ -1132,7 +1147,6 @@ footer {
 }
 
 .make-post-bottom .icon.dots {
-    background-position: 0 -796px;
     margin-right: 0;
 }
 
@@ -1153,4 +1167,169 @@ footer {
 
 .make-post-bottom .icon {
     margin-right: 5px;
+}
+
+ /*
+    POSTS
+ */
+
+.post {
+    padding-bottom: 5px;
+}
+
+.post-top {
+    display: flex;
+    justify-items: center;
+}
+ 
+.post-author-icon {
+    height: 40px;
+    width: 40px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+
+.post-author {
+    font-size: 14px;
+    font-weight: bold;
+    color: #365899;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.post-time {
+    color: #616770;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.post-author:hover,  .post-time:hover {
+    text-decoration: underline;
+}
+
+.post-top .dots {
+    display: block;
+    height: 18px;
+    width: 18px;
+}
+
+.post-info .public {
+    width: 12px;
+    height: 12px;
+    background-position: -51px -62px;
+    display: inline-block;
+    background-image: url(https://facebook.com/rsrc.php/v3/y_/r/xWpqy4JkIl6.png);
+    background-size: auto;
+    background-repeat: no-repeat;
+    margin-left: 10px;
+    position: relative;
+}
+
+.post-info .public:before {
+    content: "";
+    display: block;
+    width: 2px;
+    height: 1px;
+    background: #90949C;
+    position: absolute;
+    left: -8px;
+    top: 6px;
+}
+
+.feed-section.post {
+    padding: 0;
+    padding-top: 15px;
+}
+
+.post-top {
+    margin-bottom: 10px;
+    padding: 0 15px;
+}
+
+.post-body{ 
+    margin-bottom: 10px;
+    padding: 0 15px;
+}
+
+.post-bottom {
+    border-top: 1px solid #DDDFE2;
+    padding-top: 5px;
+    display: flex;
+}
+
+.post-bottom-btn {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 9px 0;
+    cursor: pointer;
+    color: #616770;
+    font-size: 13px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    outline: none;
+}
+
+.post-bottom-btn:hover {
+    background: #F6F6F7;
+}
+
+.post-bottom-btn .icon {
+    height: 18px;
+    width: 18px;
+    margin-top: -2px;
+    margin-right: 5px;
+    background-image: url(https://facebook.com/rsrc.php/v3/yp/r/kKSgsJcgvd-.png);
+    background-repeat: no-repeat;
+    background-size: auto;
+}
+
+.post-bottom-btn .icon.like {
+    background-position: 0 -193px;
+}
+
+.post-bottom-btn .icon.like {
+    background-position: 0 -155px;
+}
+
+.comments {
+    padding: 12px 15px;
+    background: #F2F3F5;
+    border-top: 1px solid #dddfe2;
+}
+
+.comments .round-icon {
+    width: 30px;
+    height: 30px;
+}
+
+.write-comment-block {
+    display: flex;
+    align-items: center;
+}
+
+.comment-input {
+    border-radius: 16px;
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 10px 12px;
+    font-size: 13px;
+    outline: none;
+    
+}
+
+.comment-input::placeholder {
+    font-size: 13px;
+    color: #90949c;
+}
+
+.comment-input:focus::placeholder {
+    color: #bec2c9;
 }
