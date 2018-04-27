@@ -1257,7 +1257,8 @@ footer {
 
 .post-bottom {
     border-top: 1px solid #DDDFE2;
-    padding-top: 5px;
+    padding: 5px 0;
+    margin: 0 12px;
     display: flex;
 }
 
@@ -1275,6 +1276,7 @@ footer {
     align-items: center;
     border-radius: 4px;
     outline: none;
+    transition: .1s transform;
 }
 
 .post-bottom-btn:hover {
@@ -1295,17 +1297,21 @@ footer {
     background-position: 0 -193px;
 }
 
-.post-bottom-btn .icon.like {
+.post-bottom-btn:active {
+    transform: scale(.97);
+}
+
+.post-bottom-btn .icon.comment-icon {
     background-position: 0 -155px;
 }
 
-.comments {
+.comments-block {
     padding: 12px 15px;
     background: #F2F3F5;
     border-top: 1px solid #dddfe2;
 }
 
-.comments .round-icon {
+.comments-block .round-icon {
     width: 30px;
     height: 30px;
 }
@@ -1332,4 +1338,37 @@ footer {
 
 .comment-input:focus::placeholder {
     color: #bec2c9;
+}
+
+.comment {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.comment .round-icon {
+    flex-shrink: 0;
+}
+
+.comment-body {
+    margin-left: 5px;
+    background: white;
+    padding: 8px 10px;
+    border-radius: 20px;
+    overflow: hidden;
+    word-wrap: break-word;
+}
+
+.comment-author {
+    color: #365899;   
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.comment-author:visited, .comment-author:active {
+    color: #365899;   
+}
+
+.comment-author:hover {
+    text-decoration: underline;
 }

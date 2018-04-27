@@ -1,4 +1,4 @@
-let createFriend = (friend) => {
+let createFriend = friend => {
     return `
         <div class="friend">
             <div class="round-icon" style="background-image: url(${friend.avatar_url});"></div>
@@ -21,13 +21,13 @@ let createFriend = (friend) => {
     `;
 }
 
-let createGame = (game) => {
+let createGame = game => {
     return `
         <div class="game" style="background-image: url(${game.game_photo});"></div>
     `;
 }
 
-let createInstantGame = (game) => {
+let createInstantGame = game => {
     return `
     <div class="game friend-photo" style="background-image: url(${game.avatar_url});">
         <div class="game-logo" style="background-image: url(${game.game_photo});"></div>
@@ -35,7 +35,7 @@ let createInstantGame = (game) => {
     `;
 }
 
-let createStory = (story) => {
+let createStory = story => {
     return `
         <div class="story">
             <div class="round-icon" style="background-image: url(${story.author.avatar_url});"></div>
@@ -47,6 +47,60 @@ let createStory = (story) => {
     `;
 }
 
+let createComment = comment => {
+    return `
+        <div class="comment">
+            <div class="round-icon" style="background-image: url(${comment.author.avatar_url})"></div>
+            <div class="comment-body">
+                <a href="" class="comment-author">${comment.author.name}</a>
+                <span class="comment-text">
+                    ${comment.text}
+                </span>
+            </div>
+        </div>
+    `;
+}
+
+let createComments = comments => { 
+    let res = '';
+    comments.forEach(comment => res += createComment(comment));
+    return res;
+}
+
+let createPost = post => {
+    return `
+        <div class="feed-section post">
+            <div class="post-top">
+                <div class="post-author-icon" style="background-image: url(${post.author.avatar_url})"></div>
+                <div class="post-info">
+                    <div class="post-author">${post.author.name}</div>
+                    <div class="post-time">${post.time_posted} mins
+                        <span class="public"></span>
+                    </div>
+                </div>
+                <div class="round-icon dots"></div>
+            </div>
+            <div class="post-body">
+                ${post.text}
+            </div>
+            <div class="post-bottom">
+                <button class="post-bottom-btn">
+                    <span class="icon like"></span> Like</button>
+                <button class="post-bottom-btn comment-btn">
+                    <span class="icon comment-icon"></span> Comment</button>
+            </div>
+            <div class="comments-block">
+                <div class="comments">
+                    ${createComments(post.comments)}
+                </div>
+                <div class="write-comment-block">
+                    <div class="user-avatar round-icon"></div>
+                    <input type="text" class="comment-input" placeholder="Write a comment...">
+                </div>
+            </div>
+        </div>
+    `
+}
 
 let addConv = () => {
     let friends = document.querySelector('.friends');
@@ -68,6 +122,25 @@ let addStories = () => {
     data.stories.forEach(story => stories.innerHTML += createStory(story));
 }
 
+let addPosts = () => {
+    let posts = document.querySelector('.posts');
+    data.posts.forEach(post => posts.innerHTML += createPost(post));
+}
+
+addConv();
+addConv();
+addConv();
+addConv();
+addConv();
+addConv();
+addConv();
+addConv();
+
+addGames();
+addInstantGames();
+addStories();
+addPosts();
+
 
 document.querySelector('.search-input').onblur = function () {
     if (document.querySelector('.recent-searches:hover')) {
@@ -81,7 +154,7 @@ document.querySelectorAll('.user-lastname').forEach(elem => elem.innerHTML += ' 
 
 document.querySelectorAll('.user-avatar').forEach(elem => elem.style.backgroundImage = `url(${data.user.avatar_url})`);
 
-document.querySelectorAll('.nav-btn').forEach((btn) => {
+document.querySelectorAll('.nav-btn').forEach(btn => {
     btn.onmousedown = function () {
         if (document.activeElement === this && !this.querySelector('.popup:hover')) {
             this.blur();
@@ -168,15 +241,30 @@ document.querySelector('.post-input').onblur = function () {
 
 }
 
-addConv();
-addConv();
-addConv();
-addConv();
-addConv();
-addConv();
-addConv();
-addConv();
+document.querySelectorAll('.comment-btn').forEach(btn => {
+    btn.onclick = () => {
+        let post = btn.closest('.post');
+        let inp = post.querySelector('.comment-input');
+        inp.focus();
+    }
+});
 
-addGames();
-addInstantGames();
-addStories();
+document.querySelectorAll('.comment-input').forEach( inp => {
+    inp.onkeyup = (e) => {
+        if(e.keyCode == 13){
+            let text = inp.value;
+            let comment = {
+                author: {
+                    name: data.user.name + ' ' + data.user.lastname,
+                    avatar_url: data.user.avatar_url
+                },
+                time: 0,
+                text
+            }
+
+            let comments = inp.closest('.post').querySelector('.comments');
+            comments.innerHTML += createComment(comment);
+            inp.value = '';
+        }
+    }
+});
