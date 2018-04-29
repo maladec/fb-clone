@@ -242,15 +242,20 @@ document.querySelector('.post-input').onblur = function() {
     }, 300);
 }
 
-let addPostLikesListener = () => {
+let addPostLikesListeners = () => {
     let btns = document.querySelectorAll('.post-like-btn');
     btns.forEach(btn => {
         btn.onclick = () => {
             let change = btn.classList.contains('liked') ? -1 : 1;
             let post = btn.closest('.post');
-            let likesCountElem = post.querySelector('.likes-count')
+            let likesCountElem = post.querySelector('.likes-count');
             likesCountElem.innerHTML = +likesCountElem.innerHTML + change;
-            
+            if(+likesCountElem.innerHTML == 0)
+                post.querySelector('.likes-block').classList.add('no-likes');
+            else
+                post.querySelector('.likes-block').classList.remove('no-likes');
+                
+                
             btn.classList.toggle('liked');
 
         }
@@ -290,7 +295,7 @@ let addCommentInputListeners = () => {
 }
 
 let addPostListeners = function() {
-    addPostLikesListener();
+    addPostLikesListeners();
     addCommentBtnListeners();
     addCommentInputListeners();
 }
@@ -312,7 +317,8 @@ document.querySelector('.post-submit-btn').onclick = function(){
         },            
         time_posted: 0,
         text: postInp.value,
-        comments: []
+        comments: [],
+        likes: 0
     }
     posts.innerHTML = createPost(post) + posts.innerHTML;
     posting = true;
