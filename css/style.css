@@ -43,6 +43,10 @@ a:link, a:visited, a:hover, a:active {
     color: inherit;
 }
 
+button {
+    cursor: pointer;
+}
+
 body {
     background: var(--bg-color);
     font-family: Helvetica, Arial, sans-serif;
@@ -462,6 +466,15 @@ header {
     z-index: 1;
 }
 
+.games-title {
+    color: #989db3;
+    font-weight: bold;
+    text-shadow: 0 1px #fff;
+    text-transform: uppercase;
+    font-size: 11px;
+    padding: 5px;
+}
+
 .friend {
     display: flex;
     align-items: center;
@@ -701,6 +714,7 @@ main {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    padding: 2px 0;
 }
 
 .left-sb-section .title {
@@ -823,7 +837,7 @@ main {
 
 .feed-section {
     border: 1px solid #dddfe2;
-    border-radius: 5px;
+    border-radius: 3px;
     margin-bottom: 12px;
     background: white;    
     padding: 10px 12px;
@@ -992,9 +1006,10 @@ footer {
 }
 
 .make-post-block {
-    height: 150px;
     position: relative;
-    padding-top: 30px;
+    padding: 0;
+    border-radius: 4px;
+    overflow: hidden;
 }
 
 .make-post-top {
@@ -1003,14 +1018,23 @@ footer {
     color: #365899;
     background : #F6F7F9;
     padding: 7px 0px;
-    position: absolute;
-    left: 0;
-    top: 0;
-    border-top-right-radius: 4px;
-    border-top-left-radius: 4px;
     width: 100%;
     border-bottom: 1px solid #DDDFE2;
+    position: relative;
 }
+
+.make-post-top:after {
+    content: "";
+    display: block;
+    width: 11px;
+    height: 11px;
+    position: absolute;
+    bottom: -7px;
+    left: 48px;
+    transform: rotate(-135deg);
+    box-shadow: 1px 1px 2px -1px #ccc;
+    background: white;
+}  
 
 .make-post-mode {
     cursor: pointer;
@@ -1060,19 +1084,6 @@ footer {
     background-position: 0 -304px;
 }
 
-.make-post-top:after {
-    content: "";
-    display: block;
-    width: 11px;
-    height: 11px;
-    position: absolute;
-    bottom: -7px;
-    left: 48px;
-    transform: rotate(-135deg);
-    box-shadow: 1px 1px 2px -1px #ccc;
-    background: white;
-}  
-
 .make-post-block .user-avatar {
     height: 40px;
     width: 40px;
@@ -1083,6 +1094,7 @@ footer {
 .post-input-block {
     display: flex;
     align-items: center;
+    padding: 0 12px;
 }
 
 .post-input {
@@ -1126,7 +1138,7 @@ footer {
     font-size: 12px;
     font-weight: bold;
     border-top: 1px solid #DDDFE2;
-    padding-top: 10px;
+    padding: 10px 12px;
 }
 
 .make-post-bottom .icon {
@@ -1279,6 +1291,15 @@ footer {
     transition: .1s transform;
 }
 
+.post-bottom-btn.liked {
+    color: #4080FF;
+}
+
+.post-bottom-btn.liked .icon {
+    background-image: url(https://facebook.com/rsrc.php/v3/yj/r/E6ILKRlsxpN.png);
+    background-position: -38px -90px !important;
+}
+
 .post-bottom-btn:hover {
     background: #F6F6F7;
 }
@@ -1343,7 +1364,20 @@ footer {
 .comment {
     display: flex;
     align-items: flex-start;
-    margin-bottom: 10px;
+    padding: 5px 0;
+    position: relative;
+    padding-right: 20px;
+}
+
+.comment.new:before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: -16px;
+    top: 0;
+    width: 1px;
+    background: #4080FF;
+    height: 100%;
 }
 
 .comment .round-icon {
@@ -1355,8 +1389,30 @@ footer {
     background: white;
     padding: 8px 10px;
     border-radius: 20px;
-    overflow: hidden;
+    /* overflow: hidden; */
+    max-width: 92%; /* ??? */
     word-wrap: break-word;
+    position: relative;
+}
+
+.comment-body:after {
+    content: "";
+    display: none;
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    right: -22px;
+    top: 50%;
+    margin-top: -6px;
+    background-image: url(https://facebook.com/rsrc.php/v3/yY/r/hcIfHWLPkRB.png);
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: -93px -292px;
+    cursor: pointer;
+}
+
+.comment:hover .comment-body:after {
+    display: block;
 }
 
 .comment-author {
@@ -1370,5 +1426,97 @@ footer {
 }
 
 .comment-author:hover {
+    text-decoration: underline;
+}
+
+.make-post-submit-block {
+    display: none;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 12px;
+    font-weight: bold;
+    background: #F6F7F9;
+    border-top: 1px solid #DDDFE2;
+    padding: 8px 15px;
+}
+
+.post-privacy-select {
+    background-color: #f6f7f9;
+    border: 1px solid #ced0d4;
+    color: #4b4f56;
+    border-radius: 2px;
+    padding: 3px 8px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: .2s background;
+}
+
+.post-privacy-select:hover {
+    background: #E9EBEE;
+}
+
+.public-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    color: #4b4f56;
+    background-position: 0 -1819px;
+    background-image: url(https://facebook.com/rsrc.php/v3/yl/r/7bRXeNHfJLD.png);
+    background-size: auto;
+    background-repeat: no-repeat;
+}
+
+.post-privacy-select .public-icon {
+    margin-right: 5px;
+}
+
+.post-submit-btn {
+    background: #4267B2;
+    border: none;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 2px;
+    font-weight: bold;
+}
+
+.triangle-icon {
+    background-image: url(https://www.facebook.com/rsrc.php/v3/yx/r/pzdnQfNKajS.png);
+    background-position: 0 -711px;
+    height: 15px;
+    width: 15px;
+    opacity: .6;
+    margin-top: -1px;
+}
+
+.likes-block {
+    display: flex;
+    align-items: center;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #DDDFE2;
+    margin-bottom: 12px;
+    cursor: pointer;
+}
+
+.likes-block.no-likes {
+    display: none;
+}
+
+.likes-icon {
+    width: 16px;
+    height: 16px;
+    background-image: url(https://facebook.com/rsrc.php/v3/yT/r/yC2suuoYnao.png);
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: -17px -482px;
+    margin-right: 5px;
+}
+
+.likes-count {
+    color: #365899;
+}
+
+.likes-count:hover {
     text-decoration: underline;
 }

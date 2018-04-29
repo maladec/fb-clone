@@ -47,9 +47,9 @@ let createStory = story => {
     `;
 }
 
-let createComment = comment => {
+let createComment = (comment, isNew) => {
     return `
-        <div class="comment">
+        <div class="comment ${isNew ? 'new' : ''}">
             <div class="round-icon" style="background-image: url(${comment.author.avatar_url})"></div>
             <div class="comment-body">
                 <a href="" class="comment-author">${comment.author.name}</a>
@@ -84,17 +84,21 @@ let createPost = post => {
                 ${post.text}
             </div>
             <div class="post-bottom">
-                <button class="post-bottom-btn">
+                <button class="post-bottom-btn post-like-btn">
                     <span class="icon like"></span> Like</button>
                 <button class="post-bottom-btn comment-btn">
                     <span class="icon comment-icon"></span> Comment</button>
             </div>
             <div class="comments-block">
+                <div class="likes-block ${!post.likes ? 'no-likes' : ''}">
+                    <div class="likes-icon"></div>
+                    <div class="likes-count">${post.likes}</div>
+                </div>
                 <div class="comments">
                     ${createComments(post.comments)}
                 </div>
                 <div class="write-comment-block">
-                    <div class="user-avatar round-icon"></div>
+                    <div class="user-avatar round-icon" style="background-image: url(${post.author.avatar_url})"></div>
                     <input type="text" class="comment-input" placeholder="Write a comment...">
                 </div>
             </div>
@@ -127,10 +131,6 @@ let addPosts = () => {
     data.posts.forEach(post => posts.innerHTML += createPost(post));
 }
 
-addConv();
-addConv();
-addConv();
-addConv();
 addConv();
 addConv();
 addConv();
@@ -226,45 +226,98 @@ document.querySelector('.post-input').onfocus = function () {
     document.querySelector('.black-bg').classList.remove('initial');
     document.querySelector('.black-bg').classList.add('active');
     document.querySelector('.make-post-block').style.zIndex = '300';
+    document.querySelector('.make-post-submit-block').style.display = 'flex';
 }
 
-document.querySelector('.post-input').onblur = function () {
-    if (document.querySelector('.make-post-block:hover')) {
+document.querySelector('.post-input').onblur = function() {
+    if (!posting && document.querySelector('.make-post-block:hover')) {
         this.focus();
         return;
     }
+    document.querySelector('.make-post-submit-block').style.display = '';
     document.querySelector('.black-bg').classList.remove('active');
     setTimeout(() => {
         document.querySelector('.black-bg').classList.add('initial');
         document.querySelector('.make-post-block').style.zIndex = '';
     }, 300);
-
 }
 
-document.querySelectorAll('.comment-btn').forEach(btn => {
-    btn.onclick = () => {
-        let post = btn.closest('.post');
-        let inp = post.querySelector('.comment-input');
-        inp.focus();
-    }
-});
+let addPostLikesListener = () => {
+    let btns = document.querySelectorAll('.post-like-btn');
+    btns.forEach(btn => {
+        btn.onclick = () => {
+            let change = btn.classList.contains('liked') ? -1 : 1;
+            let post = btn.closest('.post');
+            let likesCountElem = post.querySelector('.likes-count')
+            likesCountElem.innerHTML = +likesCountElem.innerHTML + change;
+            
+            btn.classList.toggle('liked');
 
-document.querySelectorAll('.comment-input').forEach( inp => {
-    inp.onkeyup = (e) => {
-        if(e.keyCode == 13){
-            let text = inp.value;
-            let comment = {
-                author: {
-                    name: data.user.name + ' ' + data.user.lastname,
-                    avatar_url: data.user.avatar_url
-                },
-                time: 0,
-                text
-            }
-
-            let comments = inp.closest('.post').querySelector('.comments');
-            comments.innerHTML += createComment(comment);
-            inp.value = '';
         }
+    });
+}
+
+let addCommentBtnListeners = () => {
+    document.querySelectorAll('.comment-btn').forEach(btn => {
+        btn.onclick = () => {
+            let post = btn.closest('.post');
+            let inp = post.querySelector('.comment-input');
+            inp.focus();
+        }
+    });
+}
+
+let addCommentInputListeners = () => {
+    document.querySelectorAll('.comment-input').forEach( inp => {
+        inp.onkeyup = (e) => {
+            if(e.keyCode == 13){
+                let text = inp.value;
+                let comment = {
+                    author: {
+                        name: data.user.name + ' ' + data.user.lastname,
+                        avatar_url: data.user.avatar_url
+                    },
+                    time: 0,
+                    text
+                }
+    
+                let comments = inp.closest('.post').querySelector('.comments');
+                comments.innerHTML += createComment(comment, true);
+                inp.value = '';
+            }
+        }
+    });
+}
+
+let addPostListeners = function() {
+    addPostLikesListener();
+    addCommentBtnListeners();
+    addCommentInputListeners();
+}
+
+addPostListeners();
+
+
+let posting = false;
+
+document.querySelector('.post-submit-btn').onclick = function(){
+    let posts = document.querySelector('.posts');
+    let postInp = document.querySelector('.post-input');
+    if(!postInp.value) return;
+    let post = {
+        author: {
+            name: data.user.name + ' ' + data.user.lastname,
+            avatar_url: data.user.avatar_url,
+
+        },            
+        time_posted: 0,
+        text: postInp.value,
+        comments: []
     }
-});
+    posts.innerHTML = createPost(post) + posts.innerHTML;
+    posting = true;
+    postInp.blur()
+    posting = false;
+    postInp.value = '';
+    addPostListeners();
+}
